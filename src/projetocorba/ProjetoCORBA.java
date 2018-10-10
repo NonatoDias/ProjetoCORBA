@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author nonat
+ * @author Nonato Dias
  */
 public class ProjetoCORBA extends Application {
     
