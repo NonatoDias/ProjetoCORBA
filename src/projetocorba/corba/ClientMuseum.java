@@ -5,7 +5,7 @@
  */
 package projetocorba.corba;
 
-import SystemControl.*;
+import GateModule.*;
 import org.omg.CosNaming.*; 
 import org.omg.CORBA.*;
 import org.omg.PortableServer.*; 
@@ -25,14 +25,14 @@ public class ClientMuseum {
 
             NamingContext naming = NamingContextHelper.narrow(obj);
 
-            NameComponent[] name = {new NameComponent("Museum","Exemplo")};
+            NameComponent[] name = {new NameComponent("Gate","Exemplo")};
 
             org.omg.CORBA.Object objRef =  naming.resolve(name);
 
-            Museum museum = MuseumHelper.narrow(objRef);		
+            Gate gate = GateHelper.narrow(objRef);		
 
             
-            int count = museum.addVisitor();
+            int count = gate.addVisitor();
             System.out.println("qtde "+count);
 
 

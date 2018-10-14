@@ -15,7 +15,6 @@ package projetocorba.corba;
  * and open the template in the editor.
  */
 
-import SystemControl.*;
 import org.omg.CosNaming.*; 
 import org.omg.CORBA.*;
 import org.omg.PortableServer.*;
@@ -33,11 +32,11 @@ public class Server{
             org.omg.CORBA.Object obj = orb.resolve_initial_references("NameService");
 
             NamingContext naming = NamingContextHelper.narrow(obj);
-            MuseumImpl museum = new MuseumImpl();
-            org.omg.CORBA.Object objRef = rootPOA.servant_to_reference(museum);
+            GateImpl gate = new GateImpl();
+            org.omg.CORBA.Object objRef = rootPOA.servant_to_reference(gate);
 
 
-            NameComponent[] name = {new NameComponent("Museum","Exemplo")};
+            NameComponent[] name = {new NameComponent("Gate","Exemplo")};
             naming.rebind(name,objRef);
 
             rootPOA.the_POAManager().activate();

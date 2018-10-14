@@ -5,17 +5,17 @@
  */
 package projetocorba.corba;
 
-import SystemControl.MuseumPOA;
+import GateModule.GatePOA;
 
 /**
  *
  * @author Nonato Dias
  */
-public class MuseumImpl extends MuseumPOA{
+public class GateImpl extends GatePOA{
 
     private int count;
 
-    public MuseumImpl() {
+    public GateImpl() {
         this.count = 0;
     }
     
