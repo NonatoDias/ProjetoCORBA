@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetocorba.FXMLWatchmanController">
+   <children>
+      <AnchorPane prefHeight="371.0" prefWidth="677.0">
+         <children>
+            <Pane layoutY="-1.0" prefHeight="406.0" prefWidth="674.0" style="-fx-background-color: WHITE;">
+               <children>
+                  <JFXButton layoutX="472.0" layoutY="344.0" prefHeight="30.0" prefWidth="157.0" style="-fx-background-color: #008e46;" text="NOITE" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="280.0" fitWidth="329.0" layoutX="281.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/watchman.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton layoutX="260.0" layoutY="344.0" prefHeight="30.0" prefWidth="157.0" style="-fx-background-color: #008e46;" text="DIA" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="50.0" prefHeight="125.0" prefWidth="136.0" style="-fx-background-color: whitesmoke;" text="30" textAlignment="CENTER">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="77.0" fitWidth="157.0" layoutX="85.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/bell.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

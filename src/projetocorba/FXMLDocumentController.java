@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import projetocorba.corba.ClientMuseum;
+import projetocorba.corba.Server;
 
 /**
  *
@@ -33,7 +35,7 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("click ok");
         Thread t = new Thread(() -> {
             System.out.println("SERVIDOR");
-            Servidor.run();
+            Server.run();
         });
         t.setDaemon(true);
         t.start();
@@ -45,7 +47,7 @@ public class FXMLDocumentController implements Initializable {
 
         Thread t2 = new Thread(() -> {
             System.out.println("CLIENT");
-            Cliente.run();
+            ClientMuseum.run();
         });
         t2.setDaemon(true);
         t2.start();

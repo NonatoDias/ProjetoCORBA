@@ -1,0 +1,7 @@
+module SystemControl{
+    interface Museum{
+        long addVisitor ();
+        long decreaseVisitor ();
+    };
+};
+

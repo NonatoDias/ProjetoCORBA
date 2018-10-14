@@ -3,15 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projetocorba;
+package projetocorba.corba;
 
-import Matematica.*;
+import SystemControl.*;
 import org.omg.CosNaming.*; 
 import org.omg.CORBA.*;
 import org.omg.PortableServer.*; 
 
-public class Cliente{
-
+/**
+ *
+ * @author Nonato Dias
+ */
+public class ClientMuseum {
+    
     public static void run(){
         try {
             String args [] = new String[1];
@@ -21,20 +25,16 @@ public class Cliente{
 
             NamingContext naming = NamingContextHelper.narrow(obj);
 
-            NameComponent[] name = {new NameComponent("Calculadora","Exemplo")};
+            NameComponent[] name = {new NameComponent("Museum","Exemplo")};
 
             org.omg.CORBA.Object objRef =  naming.resolve(name);
 
-            Calculadora calc = CalculadoraHelper.narrow(objRef);		
+            Museum museum = MuseumHelper.narrow(objRef);		
 
-            try{
-                System.out.println("5+3="+ calc.soma(5,3));
-                System.out.println("5/0="+ calc.divisao(5,0));
+            
+            int count = museum.addVisitor();
+            System.out.println("qtde "+count);
 
-            }catch (DivisaoPorZero ex){
-                System.out.println("Divisao Por Zero");
-                System.out.println("A Diviao foi "+ex.arg1 +"/ "+ex.arg2); 
-            }
 
         }catch (Exception e) {
             System.out.println("Outro Erro : " + e) ;
