@@ -5,13 +5,18 @@
  */
 package projetocorba;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import projetocorba.corba.ClientMuseum;
 import projetocorba.corba.Server;
 
@@ -45,20 +50,27 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonAction2(ActionEvent event) {
         System.out.println("click ok");
 
-        Thread t2 = new Thread(() -> {
-            System.out.println("CLIENT");
-            ClientMuseum.run();
-        });
-        t2.setDaemon(true);
-        t2.start();
+        openWindow("FXMLMuseum.fxml");
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        
-        
     }    
+    
+    public void openWindow(String fxml){
+        Parent game = null;
+        try {
+            game = FXMLLoader.load(getClass().getResource(fxml));
+        } catch (IOException ex) {
+            //log("ERROR: "+ex.toString());
+        }
+        Stage stage = new Stage();
+        Scene scene = new Scene(game);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
     
 }

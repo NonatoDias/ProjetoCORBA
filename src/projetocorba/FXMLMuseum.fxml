@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -12,17 +11,13 @@
    <children>
       <Pane layoutX="9.0" layoutY="9.0" prefHeight="464.0" prefWidth="647.0" style="-fx-background-color: #e2e4e2;">
          <children>
-            <ImageView fitHeight="434.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/museum-1.png" />
-               </image>
-            </ImageView>
-            <JFXButton layoutX="551.0" layoutY="413.0" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: white;" text="+">
+            <ImageView fx:id="imgMuseum" fitHeight="434.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true" />
+            <JFXButton fx:id="btnPlus" layoutX="551.0" layoutY="413.0" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: white;" text="+">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="455.0" layoutY="413.0" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: white;" text="-">
+            <JFXButton fx:id="btnMinus" layoutX="455.0" layoutY="413.0" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: white;" text="-">
                <font>
                   <Font size="18.0" />
                </font>
@@ -37,6 +32,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <ImageView fx:id="imgSprite" fitHeight="91.0" fitWidth="44.0" layoutX="191.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
    </children>

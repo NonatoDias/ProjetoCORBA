@@ -15,8 +15,15 @@ import org.omg.PortableServer.*;
  * @author Nonato Dias
  */
 public class ClientMuseum {
+
+    private Gate gate;
     
-    public static void run(){
+    public ClientMuseum() {
+        System.out.println("New ClientMuseu");
+    }
+    
+    
+    public void init(){
         try {
             String args [] = new String[1];
             args[0] = "-ORBInitialHost Host";
@@ -24,21 +31,20 @@ public class ClientMuseum {
             org.omg.CORBA.Object obj = orb.resolve_initial_references("NameService");
 
             NamingContext naming = NamingContextHelper.narrow(obj);
-
             NameComponent[] name = {new NameComponent("Gate","Exemplo")};
-
             org.omg.CORBA.Object objRef =  naming.resolve(name);
 
-            Gate gate = GateHelper.narrow(objRef);		
+            this.gate = GateHelper.narrow(objRef);		
 
-            
-            int count = gate.addVisitor();
-            System.out.println("qtde "+count);
-
-
+            System.out.println("Referencia para GATE ok");
         }catch (Exception e) {
             System.out.println("Outro Erro : " + e) ;
             e.printStackTrace(System.out); 
         }
+    }
+    
+    public void addVisitor () {
+        int count = this.gate.addVisitor();
+        System.out.println("qtde "+count);
     }
 }

@@ -32,10 +32,13 @@ public class Server{
             org.omg.CORBA.Object obj = orb.resolve_initial_references("NameService");
 
             NamingContext naming = NamingContextHelper.narrow(obj);
+            
+            
+            //implementações
             GateImpl gate = new GateImpl();
             org.omg.CORBA.Object objRef = rootPOA.servant_to_reference(gate);
 
-
+            //Nomes
             NameComponent[] name = {new NameComponent("Gate","Exemplo")};
             naming.rebind(name,objRef);
 

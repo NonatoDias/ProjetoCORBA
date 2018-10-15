@@ -12,7 +12,7 @@
    <children>
       <AnchorPane prefHeight="371.0" prefWidth="677.0">
          <children>
-            <Pane layoutY="-1.0" prefHeight="406.0" prefWidth="674.0" style="-fx-background-color: WHITE;">
+            <Pane layoutY="-1.0" prefHeight="406.0" prefWidth="674.0" style="-fx-background-color: whitesmoke;">
                <children>
                   <JFXButton layoutX="472.0" layoutY="344.0" prefHeight="30.0" prefWidth="157.0" style="-fx-background-color: #008e46;" text="NOITE" textFill="WHITE">
                      <font>
@@ -36,7 +36,7 @@
                   </Label>
                   <ImageView fitHeight="77.0" fitWidth="157.0" layoutX="85.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/bell.jpg" />
+                        <Image url="@../img/bell.png" />
                      </image>
                   </ImageView>
                </children>
