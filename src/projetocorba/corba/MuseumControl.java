@@ -5,6 +5,7 @@
  */
 package projetocorba.corba;
 
+import GateModule.*;
 import WatchmanModule.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,27 +22,30 @@ import projetocorba.util.LogUtil;
  */
 public class MuseumControl extends Server{
     private Runnable ready;
-    private GateImpl gate;
-    private Watchman watchman;
+    private Gate gate;
+    private GateREMOTE gateREMOTE;
+    private WatchmanLOCAL watchmanLOCAL;
 
     public MuseumControl() {
-        gate = new GateImpl();
+        gateREMOTE = new GateREMOTE();
+        watchmanLOCAL = new WatchmanLOCAL();
     }
     
     @Override
     public void run() {
         try {
             super.init();
-            super.bindRef(gate, "Gate","implementacao");
+            super.bindRef(gateREMOTE, "GateREMOTE","implementacao");
+            super.bindRef(watchmanLOCAL, "WatchmanLOCAL","implementacao");
             super.activate();
             log("Servidor Museu pronto");
             ready.run();
-            gate.getOnCountChange(()->{
+            gateREMOTE.getOnCountChange(()->{
                 try {
-                    watchman = WatchmanHelper.narrow(
-                        CorbaUtil.getObjRef("Watchman","implementacao")
+                    gate = GateHelper.narrow(
+                        CorbaUtil.getObjRef("GateLOCAL","implementacao")
                     );
-                    watchman.updateCount(gate.getCount());
+                    gate.updateCount(gateREMOTE.getCount());
                 } catch (Exception ex) {
                     System.out.println("Erro");
                     ex.printStackTrace();
@@ -65,18 +69,18 @@ public class MuseumControl extends Server{
     }
     
     public int increaseVisitor () {
-        return gate.addVisitor();
+        return gateREMOTE.addVisitor();
     }
     
     public int decreaseVisitor () {
-        return gate.decreaseVisitor();
+        return gateREMOTE.decreaseVisitor();
     }
 
     public int getCount() {
-        return gate.getCount();
+        return gateREMOTE.getCount();
     }
     
     public void setImgMuseum(ImageView imgMuseum) {
-        gate.setImgMuseum(imgMuseum);
+        watchmanLOCAL.setImgMuseum(imgMuseum);
     }
 }

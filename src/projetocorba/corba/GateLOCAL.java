@@ -6,20 +6,22 @@
 package projetocorba.corba;
 
 import GateModule.GatePOA;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.application.Platform;
+import javafx.scene.control.Label;
+import projetocorba.util.LogUtil;
 
 /**
  *
  * @author Nonato Dias
  */
-public class GateImpl extends GatePOA{
+public class GateLOCAL extends GatePOA{
 
     private int count;
     private Runnable callback = null;
-    private ImageView imgMuseum;
+    Label displayCount;
+    
 
-    public GateImpl() {
+    public GateLOCAL() {
         this.count = 0;
     }
     
@@ -49,33 +51,16 @@ public class GateImpl extends GatePOA{
     public int getCount() {
         return this.count;
     }
-
-    @Override
-    public void setTurn(String turn) {
-        setDayPeriod(turn);
+    
+    public void updateCount(int count) {
+        LogUtil.log("WatchmanImpl", " count " + count);
+        Platform.runLater(()->{
+            displayCount.setText(""+ count);
+        });
     }
     
-    /**
-     * 
-     * @param p 
-     * 0 - manha
-     * 1 - noite
-     */
-    public void setDayPeriod (String p){
-        switch(p){
-            case "DAY":
-                imgMuseum.setImage(new Image("img/museum-0.png"));
-                break;
-            case "NIGHT":
-                imgMuseum.setImage(new Image("img/museum-1.png"));
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void setImgMuseum(ImageView imgMuseum) {
-        this.imgMuseum = imgMuseum;
+    void setDisplayCount(Label displayCount) {
+        this.displayCount = displayCount;
     }
     
 }

@@ -2,8 +2,8 @@ module GateModule{
     interface Gate{
         long addVisitor ();
         long decreaseVisitor ();
+        void updateCount (in long count);
         long getCount();
-        void setTurn(in string turn);
     };
 };
 

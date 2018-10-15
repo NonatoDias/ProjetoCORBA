@@ -5,8 +5,8 @@
  */
 package projetocorba.corba;
 
-import GateModule.Gate;
-import GateModule.GateHelper;
+import GateModule.*;
+import WatchmanModule.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
@@ -22,27 +22,30 @@ import projetocorba.util.LogUtil;
  */
 public class WatchControl extends Server{
     private Runnable ready;
-    private Gate gate;
-    private WatchmanImpl watchman;
+    private Watchman watchman;
+    private WatchmanREMOTE watchmanREMOTE;
+    private GateLOCAL gateLOCAL;
 
     public WatchControl() {
-        watchman = new WatchmanImpl();
+        watchmanREMOTE = new WatchmanREMOTE();
+        gateLOCAL = new GateLOCAL();
     }
     
     @Override
     public void run() {
         try {
             super.init();
-            super.bindRef(watchman, "Watchman","implementacao");
+            super.bindRef(watchmanREMOTE, "WatchmanREMOTE","implementacao");
+            super.bindRef(gateLOCAL, "GateLOCAL","implementacao");
             super.activate();
             log("Servidor Vigilancia pronto");
             ready.run();
-            watchman.getOnTurnChange(()->{
+            watchmanREMOTE.getOnTurnChange(()->{
                 try {
-                    gate = GateHelper.narrow(
-                        CorbaUtil.getObjRef("Gate","implementacao")
+                    watchman = WatchmanHelper.narrow(
+                        CorbaUtil.getObjRef("WatchmanLOCAL","implementacao")
                     );
-                    gate.setTurn(watchman.getTurn());
+                    watchman.setTurn(watchmanREMOTE.getTurn());
                     
                 } catch (Exception ex) {
                     System.out.println("Erro");
@@ -67,11 +70,11 @@ public class WatchControl extends Server{
     }
 
     public void setDisplayCount(Label displayCount) {
-        watchman.setDisplayCount(displayCount);
+        gateLOCAL.setDisplayCount(displayCount);
     }
     
     public void setTurn(String turn) {
-        watchman.setTurn(turn);
+        watchmanREMOTE.setTurn(turn);
     }
     
 }
