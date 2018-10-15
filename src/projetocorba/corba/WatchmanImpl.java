@@ -17,6 +17,7 @@ import projetocorba.util.LogUtil;
 public class WatchmanImpl extends WatchmanPOA{
     String turn;
     Label displayCount;
+    private Runnable callback;
 
     public WatchmanImpl() {
         this.turn = "NIGHT";
@@ -25,6 +26,12 @@ public class WatchmanImpl extends WatchmanPOA{
     @Override
     public void setTurn(String turn) {
         this.turn = turn;
+        callback.run();
+    }
+    
+    @Override
+    public String getTurn() {
+        return this.turn;
     }
 
     @Override
@@ -37,6 +44,10 @@ public class WatchmanImpl extends WatchmanPOA{
 
     void setDisplayCount(Label displayCount) {
         this.displayCount = displayCount;
+    }
+    
+    public void getOnTurnChange(Runnable callback){
+        this.callback = callback;
     }
     
 }

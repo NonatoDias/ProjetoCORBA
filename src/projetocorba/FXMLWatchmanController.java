@@ -63,6 +63,7 @@ public class FXMLWatchmanController implements Initializable {
 
                 JFXRadioButton selectedRadioButton = (JFXRadioButton) toggleGrp.getSelectedToggle();
                 String sel = selectedRadioButton.getText().equals("DIA") ? "DAY" : "NIGHT";
+                watchServer.setTurn(sel);
             }
         });
         

@@ -3,6 +3,7 @@ module GateModule{
         long addVisitor ();
         long decreaseVisitor ();
         long getCount();
+        void setTurn(in string turn);
     };
 };
 

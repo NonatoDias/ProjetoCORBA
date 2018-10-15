@@ -1,6 +1,7 @@
 module WatchmanModule{
     interface Watchman{
         void setTurn(in string turn);
+        string getTurn();
         void updateCount (in long count);
     };
 };

@@ -46,4 +46,9 @@ public class GateImpl extends GatePOA{
     public int getCount() {
         return this.count;
     }
+
+    @Override
+    public void setTurn(String turn) {
+        System.out.println("projetocorba.corba.GateImpl.setTurn() ---- "+turn);
+    }
 }
