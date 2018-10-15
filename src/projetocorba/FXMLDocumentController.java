@@ -5,6 +5,7 @@
  */
 package projetocorba;
 
+import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,6 +37,9 @@ public class FXMLDocumentController implements Initializable {
     private Button button1;
     
     @FXML
+    private JFXButton btnWatchman;
+    
+    @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("click ok");
         Thread t = new Thread(() -> {
@@ -57,7 +61,11 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
+        btnWatchman.setOnAction((e)->{
+            openWindow("FXMLWatchman.fxml");
+        });
     }    
+    
     
     public void openWindow(String fxml){
         Parent game = null;

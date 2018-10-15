@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,35 +10,32 @@
 
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetocorba.FXMLWatchmanController">
    <children>
-      <AnchorPane prefHeight="371.0" prefWidth="677.0">
+      <AnchorPane prefHeight="405.0" prefWidth="492.0">
          <children>
-            <Pane layoutY="-1.0" prefHeight="406.0" prefWidth="674.0" style="-fx-background-color: whitesmoke;">
+            <Pane layoutY="-1.0" prefHeight="406.0" prefWidth="548.0" style="-fx-background-color: whitesmoke;">
                <children>
-                  <JFXButton layoutX="472.0" layoutY="344.0" prefHeight="30.0" prefWidth="157.0" style="-fx-background-color: #008e46;" text="NOITE" textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </JFXButton>
                   <ImageView fitHeight="280.0" fitWidth="329.0" layoutX="281.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/watchman.png" />
                      </image>
                   </ImageView>
-                  <JFXButton layoutX="260.0" layoutY="344.0" prefHeight="30.0" prefWidth="157.0" style="-fx-background-color: #008e46;" text="DIA" textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </JFXButton>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="50.0" prefHeight="125.0" prefWidth="136.0" style="-fx-background-color: whitesmoke;" text="30" textAlignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="43.0" prefHeight="157.0" prefWidth="210.0" style="-fx-background-color: whitesmoke;" text="30" textAlignment="CENTER">
                      <font>
                         <Font size="48.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="77.0" fitWidth="157.0" layoutX="85.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgBell" fitHeight="157.0" fitWidth="188.0" layoutX="59.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/bell.png" />
                      </image>
                   </ImageView>
+                  <JFXRadioButton layoutX="307.0" layoutY="333.0" text="DIA" />
+                  <JFXRadioButton layoutX="389.0" layoutY="333.0" text="NOITE" />
+                  <Label layoutX="57.0" layoutY="43.0" prefHeight="27.0" prefWidth="199.0" text="Quantidade de visitantes">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children>
