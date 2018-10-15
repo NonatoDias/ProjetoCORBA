@@ -58,34 +58,10 @@ public abstract class Server{
         naming.rebind(name,objRef);
     }
 
+    /**
+     * Método de execução definido 
+     */
     public abstract void run();
-    
-    /*{
-        try{
-           this.init();
-           
-           WatchmanImpl watchman = new WatchmanImpl();
-           GateImpl gate = new GateImpl();
-           
-           gate.getOnCountChange(()->{
-               watchman.updateCount(gate.getCount());
-           });
-   
-            bindRef(watchman, "Watchman","implementacao");
-            bindRef(gate, "Gate","implementacao");
-            
-            rootPOA.the_POAManager().activate();
-            
-            log("Servidor Pronto ...");
-            ready.run();
-            
-            this.orb.run();
-
-        }catch (Exception ex){
-            System.out.println("Erro");
-            ex.printStackTrace();
-        }
-    }*/
     
     public void activate() throws AdapterInactive{
         rootPOA.the_POAManager().activate();
@@ -95,9 +71,7 @@ public abstract class Server{
         this.orb.run();
     }
     
-    public abstract void getOnReady(Runnable r);/*{
-        ready = r;
-    }*/
+    public abstract void getOnReady(Runnable r);
     
     private void log(String msg){
         LogUtil.log("SERVER", msg);

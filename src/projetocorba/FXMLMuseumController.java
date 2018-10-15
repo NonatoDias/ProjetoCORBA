@@ -180,7 +180,6 @@ public class FXMLMuseumController implements Initializable {
     private void initServer() {
         museumServer = new MuseumServer();
         Thread t = new Thread(() -> {
-            System.out.println("SERVIDOR");
             
             museumServer.getOnReady(()->{
                 initClient();

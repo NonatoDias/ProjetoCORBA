@@ -8,7 +8,11 @@ package projetocorba.corba;
 import GateModule.*;
 import org.omg.CosNaming.*; 
 import org.omg.CORBA.*;
+import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.CosNaming.NamingContextPackage.CannotProceed;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.omg.PortableServer.*; 
+import projetocorba.util.CorbaUtil;
 
 /**
  *
@@ -24,16 +28,7 @@ public class MuseumClient {
     
     public void init(){
         try {
-            String args [] = new String[1];
-            args[0] = "-ORBInitialHost Host";
-            ORB orb = ORB.init(args,null);
-            org.omg.CORBA.Object obj = orb.resolve_initial_references("NameService");
-
-            NamingContext naming = NamingContextHelper.narrow(obj);
-            NameComponent[] name = {new NameComponent("Gate","implementacao")};
-            org.omg.CORBA.Object objRef =  naming.resolve(name);
-
-            this.gate = GateHelper.narrow(objRef);		
+            this.gate = GateHelper.narrow(CorbaUtil.getObjRef("Gate","implementacao"));		
 
             System.out.println("Referencia para GATE ok");
         }catch (Exception e) {

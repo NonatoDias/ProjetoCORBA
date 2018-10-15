@@ -5,9 +5,13 @@
  */
 package projetocorba.corba;
 
+import WatchmanModule.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.CosNaming.NamingContextPackage.CannotProceed;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
+import projetocorba.util.CorbaUtil;
 import projetocorba.util.LogUtil;
 
 /**
@@ -22,14 +26,19 @@ public class MuseumServer extends Server{
         try {
             super.init();
            
-            WatchmanImpl watchman = new WatchmanImpl();
             GateImpl gate = new GateImpl();
            
             gate.getOnCountChange(()->{
-               watchman.updateCount(gate.getCount());
+                try {
+                    //watchman.updateCount(gate.getCount());
+                    Watchman watchman = WatchmanHelper.narrow(CorbaUtil.getObjRef("Watchman","implementacao"));
+                    watchman.updateCount(gate.getCount());
+                } catch (Exception ex) {
+                    System.out.println("Erro");
+                    ex.printStackTrace();
+                }
             });
    
-            super.bindRef(watchman, "Watchman","implementacao");
             super.bindRef(gate, "Gate","implementacao");
             super.activate();
             log("Servidor Museu pronto");

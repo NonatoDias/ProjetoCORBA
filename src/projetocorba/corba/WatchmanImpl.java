@@ -6,6 +6,8 @@
 package projetocorba.corba;
 
 import WatchmanModule.WatchmanPOA;
+import javafx.application.Platform;
+import javafx.scene.control.Label;
 import projetocorba.util.LogUtil;
 
 /**
@@ -14,6 +16,7 @@ import projetocorba.util.LogUtil;
  */
 public class WatchmanImpl extends WatchmanPOA{
     String turn;
+    Label displayCount;
 
     public WatchmanImpl() {
         this.turn = "NIGHT";
@@ -26,7 +29,14 @@ public class WatchmanImpl extends WatchmanPOA{
 
     @Override
     public void updateCount(int count) {
-        LogUtil.log("WatchmanImpl", "count " + count);
+        LogUtil.log("WatchmanImpl", this.turn+ " count " + count);
+        Platform.runLater(()->{
+            displayCount.setText(""+ count);
+        });
+    }
+
+    void setDisplayCount(Label displayCount) {
+        this.displayCount = displayCount;
     }
     
 }

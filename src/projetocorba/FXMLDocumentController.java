@@ -26,40 +26,19 @@ import projetocorba.corba.Server;
  * @author Nonato Dias
  */
 public class FXMLDocumentController implements Initializable {
-    @FXML
-    private Button button;
 
     @FXML
     private Label label;
-
-    @FXML
-    private Button button1;
     
     @FXML
-    private JFXButton btnWatchman;
+    private Button btnStart;
     
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        /*System.out.println("click ok");
-        Thread t = new Thread(() -> {
-            System.out.println("SERVIDOR");
-            server.run();
-        });
-        t.setDaemon(true);
-        t.start();*/
-    }
-    
-    @FXML
-    private void handleButtonAction2(ActionEvent event) {
-        System.out.println("click ok");
-
-        openWindow("FXMLMuseum.fxml");
-    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        btnWatchman.setOnAction((e)->{
+        btnStart.setOnAction((e)->{
+            openWindow("FXMLMuseum.fxml");
             openWindow("FXMLWatchman.fxml");
         });
     }    

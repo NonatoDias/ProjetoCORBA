@@ -12,6 +12,6 @@ package projetocorba.util;
 public class LogUtil {
     
     public static void log(String who, String msg){
-        System.out.println(who + " -- " + msg);
+        System.out.println(who.toUpperCase() + " -- " + msg);
     }
 }

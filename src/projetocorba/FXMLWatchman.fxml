@@ -19,7 +19,7 @@
                         <Image url="@../img/watchman.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="43.0" prefHeight="157.0" prefWidth="210.0" style="-fx-background-color: whitesmoke;" text="30" textAlignment="CENTER">
+                  <Label fx:id="displayCount" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="43.0" prefHeight="157.0" prefWidth="210.0" style="-fx-background-color: whitesmoke;" text="0" textAlignment="CENTER">
                      <font>
                         <Font size="48.0" />
                      </font>
@@ -29,8 +29,8 @@
                         <Image url="@../img/bell.png" />
                      </image>
                   </ImageView>
-                  <JFXRadioButton layoutX="307.0" layoutY="333.0" text="DIA" />
-                  <JFXRadioButton layoutX="389.0" layoutY="333.0" text="NOITE" />
+                  <JFXRadioButton fx:id="radioDay" layoutX="307.0" layoutY="333.0" text="DIA" />
+                  <JFXRadioButton fx:id="radioNight" layoutX="389.0" layoutY="333.0" text="NOITE" />
                   <Label layoutX="57.0" layoutY="43.0" prefHeight="27.0" prefWidth="199.0" text="Quantidade de visitantes">
                      <font>
                         <Font size="18.0" />
