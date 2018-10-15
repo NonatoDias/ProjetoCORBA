@@ -22,7 +22,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import projetocorba.corba.WatchClient;
-import projetocorba.corba.WatchServer;
+import projetocorba.corba.WatchControl;
 
 /**
  * FXML Controller class
@@ -31,8 +31,7 @@ import projetocorba.corba.WatchServer;
  */
 public class FXMLWatchmanController implements Initializable {
 
-    private WatchServer watchServer;
-    private WatchClient watchClient;
+    private WatchControl watchControl;
     
     @FXML
     private ImageView imgBell;
@@ -63,7 +62,7 @@ public class FXMLWatchmanController implements Initializable {
 
                 JFXRadioButton selectedRadioButton = (JFXRadioButton) toggleGrp.getSelectedToggle();
                 String sel = selectedRadioButton.getText().equals("DIA") ? "DAY" : "NIGHT";
-                watchServer.setTurn(sel);
+                watchControl.setTurn(sel);
             }
         });
         
@@ -72,15 +71,15 @@ public class FXMLWatchmanController implements Initializable {
     }    
     
     private void initServer() {
-        watchServer = new WatchServer();
+        watchControl = new WatchControl();
         Platform.runLater(()->{
-            watchServer.setDisplayCount(displayCount);
+            watchControl.setDisplayCount(displayCount);
         });
         Thread t = new Thread(() -> {
-            watchServer.getOnReady(()->{
+            watchControl.getOnReady(()->{
                 //initClient();
             });
-            watchServer.run();
+            watchControl.run();
         });
         t.setDaemon(true);
         t.start();

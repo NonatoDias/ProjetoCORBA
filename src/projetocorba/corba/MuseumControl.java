@@ -8,6 +8,7 @@ package projetocorba.corba;
 import WatchmanModule.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.image.ImageView;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
@@ -18,31 +19,34 @@ import projetocorba.util.LogUtil;
  *
  * @author Nonato Dias
  */
-public class MuseumServer extends Server{
+public class MuseumControl extends Server{
     private Runnable ready;
+    private GateImpl gate;
+    private Watchman watchman;
+
+    public MuseumControl() {
+        gate = new GateImpl();
+    }
     
     @Override
     public void run() {
         try {
             super.init();
-           
-            GateImpl gate = new GateImpl();
-           
+            super.bindRef(gate, "Gate","implementacao");
+            super.activate();
+            log("Servidor Museu pronto");
+            ready.run();
             gate.getOnCountChange(()->{
                 try {
-                    //watchman.updateCount(gate.getCount());
-                    Watchman watchman = WatchmanHelper.narrow(CorbaUtil.getObjRef("Watchman","implementacao"));
+                    watchman = WatchmanHelper.narrow(
+                        CorbaUtil.getObjRef("Watchman","implementacao")
+                    );
                     watchman.updateCount(gate.getCount());
                 } catch (Exception ex) {
                     System.out.println("Erro");
                     ex.printStackTrace();
                 }
             });
-   
-            super.bindRef(gate, "Gate","implementacao");
-            super.activate();
-            log("Servidor Museu pronto");
-            ready.run();
             super.orbRun();
             
         } catch (Exception ex) {
@@ -58,5 +62,21 @@ public class MuseumServer extends Server{
     
     public void log(String msg){
         LogUtil.log("MuseumServer", msg);
+    }
+    
+    public int increaseVisitor () {
+        return gate.addVisitor();
+    }
+    
+    public int decreaseVisitor () {
+        return gate.decreaseVisitor();
+    }
+
+    public int getCount() {
+        return gate.getCount();
+    }
+    
+    public void setImgMuseum(ImageView imgMuseum) {
+        gate.setImgMuseum(imgMuseum);
     }
 }

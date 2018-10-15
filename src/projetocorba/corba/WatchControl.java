@@ -7,7 +7,12 @@ package projetocorba.corba;
 
 import GateModule.Gate;
 import GateModule.GateHelper;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Label;
+import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.CosNaming.NamingContextPackage.CannotProceed;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 import projetocorba.util.CorbaUtil;
 import projetocorba.util.LogUtil;
 
@@ -15,12 +20,12 @@ import projetocorba.util.LogUtil;
  *
  * @author Nonato Dias
  */
-public class WatchServer extends Server{
+public class WatchControl extends Server{
     private Runnable ready;
-    private WatchmanImpl watchman;
     private Gate gate;
+    private WatchmanImpl watchman;
 
-    public WatchServer() {
+    public WatchControl() {
         watchman = new WatchmanImpl();
     }
     
@@ -32,11 +37,18 @@ public class WatchServer extends Server{
             super.activate();
             log("Servidor Vigilancia pronto");
             ready.run();
-            this.gate = GateHelper.narrow(CorbaUtil.getObjRef("Gate","implementacao"));
             watchman.getOnTurnChange(()->{
-                gate.setTurn(watchman.getTurn());
+                try {
+                    gate = GateHelper.narrow(
+                        CorbaUtil.getObjRef("Gate","implementacao")
+                    );
+                    gate.setTurn(watchman.getTurn());
+                    
+                } catch (Exception ex) {
+                    System.out.println("Erro");
+                    ex.printStackTrace();
+                }
             });
-            
             super.orbRun();
             
         } catch (Exception ex) {

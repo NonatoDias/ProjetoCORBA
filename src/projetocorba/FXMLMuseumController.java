@@ -16,9 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import projetocorba.corba.MuseumClient;
-import projetocorba.corba.MuseumServer;
-import projetocorba.corba.Server;
+import projetocorba.corba.MuseumControl;
 import projetocorba.util.LogUtil;
 
 /**
@@ -27,9 +25,7 @@ import projetocorba.util.LogUtil;
  * @author Nonato Dias
  */
 public class FXMLMuseumController implements Initializable {
-
-    private MuseumClient clientMuseum;
-    private MuseumServer museumServer;
+    private MuseumControl museumControl;
     
     int count_ = 0;
     
@@ -58,8 +54,6 @@ public class FXMLMuseumController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         initServer();
         
-        setDayPeriod(1);
-        
         btnPlus.setOnAction((e) -> {
             increaseVisitor();
         });
@@ -71,14 +65,14 @@ public class FXMLMuseumController implements Initializable {
     
     public void increaseVisitor(){
         moveSprite("UP", ()->{
-            int c = clientMuseum.increaseVisitor();
+            int c = museumControl.increaseVisitor();
             updateCountVisitorInTheView(c);
         });
     }
     
     public void decreaseVisitor(){
         moveSprite("DOWN", ()->{
-            int c = clientMuseum.decreaseVisitor();
+            int c = museumControl.decreaseVisitor();
             updateCountVisitorInTheView(c);
         });
     }
@@ -91,25 +85,6 @@ public class FXMLMuseumController implements Initializable {
     public void enableBtns(){
         btnPlus.setDisable(false);
         btnMinus.setDisable(false);
-    }
-    
-    /**
-     * 
-     * @param p 
-     * 0 - manha
-     * 1 - noite
-     */
-    public void setDayPeriod (int p){
-        switch(p){
-            case 0:
-                imgMuseum.setImage(new Image("img/museum-0.png"));
-                break;
-            case 1:
-                imgMuseum.setImage(new Image("img/museum-1.png"));
-                break;
-            default:
-                break;
-        }
     }
     
     public void updateCountVisitorInTheView(int c){
@@ -178,24 +153,19 @@ public class FXMLMuseumController implements Initializable {
     }
 
     private void initServer() {
-        museumServer = new MuseumServer();
+        museumControl = new MuseumControl();
+        museumControl.setImgMuseum(imgMuseum);
+        
         Thread t = new Thread(() -> {
             
-            museumServer.getOnReady(()->{
-                initClient();
+            museumControl.getOnReady(()->{
+                int c = museumControl.getCount();
+                updateCountVisitorInTheView(c);
             });
             
-            museumServer.run();
+            museumControl.run();
         });
         t.setDaemon(true);
         t.start();
-    }
-
-    private void initClient() {
-        clientMuseum = new MuseumClient();
-        clientMuseum.init();
-        
-        int c = clientMuseum.getCount();
-        updateCountVisitorInTheView(c);
     }
 }
