@@ -14,11 +14,11 @@ import org.omg.PortableServer.*;
  *
  * @author Nonato Dias
  */
-public class ClientMuseum {
+public class MuseumClient {
 
     private Gate gate;
     
-    public ClientMuseum() {
+    public MuseumClient() {
         System.out.println("New ClientMuseu");
     }
     

@@ -18,7 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import projetocorba.corba.ClientMuseum;
+import projetocorba.corba.MuseumClient;
 import projetocorba.corba.Server;
 
 /**
@@ -26,9 +26,6 @@ import projetocorba.corba.Server;
  * @author Nonato Dias
  */
 public class FXMLDocumentController implements Initializable {
-    
-    private Server server;
-    
     @FXML
     private Button button;
 
@@ -43,13 +40,13 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        System.out.println("click ok");
+        /*System.out.println("click ok");
         Thread t = new Thread(() -> {
             System.out.println("SERVIDOR");
             server.run();
         });
         t.setDaemon(true);
-        t.start();
+        t.start();*/
     }
     
     @FXML
@@ -61,7 +58,6 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        server = new Server();
         
         btnWatchman.setOnAction((e)->{
             openWindow("FXMLWatchman.fxml");

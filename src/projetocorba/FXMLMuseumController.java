@@ -16,7 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import projetocorba.corba.ClientMuseum;
+import projetocorba.corba.MuseumClient;
+import projetocorba.corba.MuseumServer;
+import projetocorba.corba.Server;
 import projetocorba.util.LogUtil;
 
 /**
@@ -26,7 +28,8 @@ import projetocorba.util.LogUtil;
  */
 public class FXMLMuseumController implements Initializable {
 
-    private ClientMuseum clientMuseum;
+    private MuseumClient clientMuseum;
+    private MuseumServer museumServer;
     
     int count_ = 0;
     
@@ -53,6 +56,8 @@ public class FXMLMuseumController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        initServer();
+        
         setDayPeriod(1);
         
         btnPlus.setOnAction((e) -> {
@@ -62,12 +67,6 @@ public class FXMLMuseumController implements Initializable {
         btnMinus.setOnAction((e) -> {
             decreaseVisitor();
         });
-        
-        clientMuseum = new ClientMuseum();
-        clientMuseum.init();
-        
-        int c = clientMuseum.getCount();
-        updateCountVisitorInTheView(c);
     }    
     
     public void increaseVisitor(){
@@ -176,5 +175,28 @@ public class FXMLMuseumController implements Initializable {
     
     private void log(String msg){
         LogUtil.log("MUSEUM CONTROLLER", msg);
+    }
+
+    private void initServer() {
+        museumServer = new MuseumServer();
+        Thread t = new Thread(() -> {
+            System.out.println("SERVIDOR");
+            
+            museumServer.getOnReady(()->{
+                initClient();
+            });
+            
+            museumServer.run();
+        });
+        t.setDaemon(true);
+        t.start();
+    }
+
+    private void initClient() {
+        clientMuseum = new MuseumClient();
+        clientMuseum.init();
+        
+        int c = clientMuseum.getCount();
+        updateCountVisitorInTheView(c);
     }
 }

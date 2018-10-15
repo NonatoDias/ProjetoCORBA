@@ -21,16 +21,17 @@ import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.InvalidName;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.omg.PortableServer.*;
+import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 import projetocorba.util.LogUtil;
 
-public class Server{
+public abstract class Server{
     private POA rootPOA;
     private NamingContext naming;
     private ORB orb;
     
-    private void init() throws org.omg.CORBA.ORBPackage.InvalidName {
+    public void init() throws org.omg.CORBA.ORBPackage.InvalidName {
         String args [] = new String[1];
         args[0] = "-ORBInitialHost Host";
         this.orb = ORB.init(args,null); 	
@@ -43,7 +44,7 @@ public class Server{
     }
 
     
-    private void bindRef(Servant p_servant, String _id, String _kind) 
+    public void bindRef(Servant p_servant, String _id, String _kind) 
         throws ServantNotActive, 
         NotFound, 
         WrongPolicy, 
@@ -57,7 +58,9 @@ public class Server{
         naming.rebind(name,objRef);
     }
 
-    public void run(){
+    public abstract void run();
+    
+    /*{
         try{
            this.init();
            
@@ -74,13 +77,27 @@ public class Server{
             rootPOA.the_POAManager().activate();
             
             log("Servidor Pronto ...");
+            ready.run();
+            
             this.orb.run();
 
         }catch (Exception ex){
             System.out.println("Erro");
             ex.printStackTrace();
         }
+    }*/
+    
+    public void activate() throws AdapterInactive{
+        rootPOA.the_POAManager().activate();
     }
+    
+    public void orbRun(){
+        this.orb.run();
+    }
+    
+    public abstract void getOnReady(Runnable r);/*{
+        ready = r;
+    }*/
     
     private void log(String msg){
         LogUtil.log("SERVER", msg);
