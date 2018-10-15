@@ -30,4 +30,9 @@ public class GateImpl extends GatePOA{
         this.count--;
         return this.count;
     }
+
+    @Override
+    public int getCount() {
+        return this.count;
+    }
 }

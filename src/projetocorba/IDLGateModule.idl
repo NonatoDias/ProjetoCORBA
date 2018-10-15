@@ -2,6 +2,7 @@ module GateModule{
     interface Gate{
         long addVisitor ();
         long decreaseVisitor ();
+        long getCount();
     };
 };
 

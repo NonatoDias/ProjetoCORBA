@@ -22,7 +22,6 @@ public class ClientMuseum {
         System.out.println("New ClientMuseu");
     }
     
-    
     public void init(){
         try {
             String args [] = new String[1];
@@ -43,8 +42,15 @@ public class ClientMuseum {
         }
     }
     
-    public void addVisitor () {
-        int count = this.gate.addVisitor();
-        System.out.println("qtde "+count);
+    public int increaseVisitor () {
+        return this.gate.addVisitor();
+    }
+    
+    public int decreaseVisitor () {
+        return this.gate.decreaseVisitor();
+    }
+
+    public int getCount() {
+        return gate.getCount();
     }
 }

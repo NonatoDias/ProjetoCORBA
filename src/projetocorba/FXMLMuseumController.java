@@ -12,10 +12,12 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import projetocorba.corba.ClientMuseum;
+import projetocorba.util.LogUtil;
 
 /**
  * FXML Controller class
@@ -42,6 +44,9 @@ public class FXMLMuseumController implements Initializable {
 
     @FXML
     private JFXButton btnMinus;
+    
+    @FXML
+    private Label labelCount;
 
     /**
      * Initializes the controller class.
@@ -50,20 +55,34 @@ public class FXMLMuseumController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         setDayPeriod(1);
         
-        btnPlus.setOnAction((event) -> {
-            moveSpriteUP();
+        btnPlus.setOnAction((e) -> {
+            increaseVisitor();
         });
         
-        btnMinus.setOnAction((event) -> {
-            moveSpriteDOWN();
+        btnMinus.setOnAction((e) -> {
+            decreaseVisitor();
         });
         
+        clientMuseum = new ClientMuseum();
+        clientMuseum.init();
         
-        //System.out.println("position "+imgSprite.localToScene(imgSprite.getBoundsInLocal()).getMinX());
-        // TODO
-        /*clientMuseum = new ClientMuseum();
-        clientMuseum.init();*/
+        int c = clientMuseum.getCount();
+        updateCountVisitorInTheView(c);
     }    
+    
+    public void increaseVisitor(){
+        moveSprite("UP", ()->{
+            int c = clientMuseum.increaseVisitor();
+            updateCountVisitorInTheView(c);
+        });
+    }
+    
+    public void decreaseVisitor(){
+        moveSprite("DOWN", ()->{
+            int c = clientMuseum.decreaseVisitor();
+            updateCountVisitorInTheView(c);
+        });
+    }
     
     public void disableBtns(){
         btnPlus.setDisable(true);
@@ -94,13 +113,42 @@ public class FXMLMuseumController implements Initializable {
         }
     }
     
-    public void moveSpriteDOWN(){
+    public void updateCountVisitorInTheView(int c){
+        //int c = clientMuseum.getCount();
+        labelCount.setText(""+c);
+    }
+    
+    /**
+     * Animação de movimento
+     * @param d, sentido do movimento
+     *    "UP" - para cima
+     *    "DOWN" - para baixo
+     * @param done, callback
+     */
+    public void moveSprite(String d, Runnable done){
+        final int step;
+        final String prefix;
+        double y0;
+        switch(d){
+            case "UP":
+                step = -19;
+                prefix = "up";
+                y0 = 300;
+                break;
+            case "DOWN":
+                step = +19;
+                prefix = "down";
+                y0 = 227;
+                break;
+            default:
+                return;
+        }
+        
         disableBtns();
         count_ = 0;
         int [] order = {1, 3, 1, 2};
-        int step = 19;
-        grpSprite.setLayoutY(227);
-        imgSprite.setImage(new Image("img/down-"+order[count_]+".png"));
+        grpSprite.setLayoutY(y0);
+        imgSprite.setImage(new Image("img/"+prefix+"-"+order[count_]+".png"));
         
         TranslateTransition translateTransition = new TranslateTransition();  
         translateTransition.setDuration(Duration.millis(400)); 
@@ -112,47 +160,21 @@ public class FXMLMuseumController implements Initializable {
         translateTransition.setOnFinished((e)->{
             count_ +=1;
             if(count_ < 4){
-                imgSprite.setImage(new Image("img/down-"+order[count_]+".png"));
+                imgSprite.setImage(new Image("img/"+prefix+"-"+order[count_]+".png"));
                 translateTransition.setFromY(count_* step);
                 translateTransition.setByY(step);
                 translateTransition.play();
             }else{
                 imgSprite.setImage(null);
                 translateTransition.stop();
+                done.run();
                 enableBtns();
             }
         });
         translateTransition.play();
     }
     
-    public void moveSpriteUP(){ 
-        disableBtns();
-        count_ = 0;
-        int [] order = {1, 3, 1, 2};
-        int step = -19;
-        grpSprite.setLayoutY(300);
-        imgSprite.setImage(new Image("img/up-"+order[count_]+".png"));
-        
-        TranslateTransition translateTransition = new TranslateTransition();  
-        translateTransition.setDuration(Duration.millis(400)); 
-        translateTransition.setNode(grpSprite);
-        
-        translateTransition.setFromY(0);
-        translateTransition.setByY(step);
-        translateTransition.setAutoReverse(false); 
-        translateTransition.setOnFinished((e)->{
-            count_ +=1;
-            if(count_ < 4){
-                imgSprite.setImage(new Image("img/up-"+order[count_]+".png"));
-                translateTransition.setFromY(count_* step);
-                translateTransition.setByY(step);
-                translateTransition.play();
-            }else{
-                imgSprite.setImage(null);
-                translateTransition.stop();
-                enableBtns();
-            }
-        });
-        translateTransition.play();
+    private void log(String msg){
+        LogUtil.log("MUSEUM CONTROLLER", msg);
     }
 }

@@ -1,0 +1,8 @@
+module WatchmanModule{
+    interface Watchman{
+        void setTurn(in string turn);
+        void updateCount (in long count);
+    };
+};
+
+
