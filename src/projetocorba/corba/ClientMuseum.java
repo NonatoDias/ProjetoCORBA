@@ -30,7 +30,7 @@ public class ClientMuseum {
             org.omg.CORBA.Object obj = orb.resolve_initial_references("NameService");
 
             NamingContext naming = NamingContextHelper.narrow(obj);
-            NameComponent[] name = {new NameComponent("Gate","Exemplo")};
+            NameComponent[] name = {new NameComponent("Gate","implementacao")};
             org.omg.CORBA.Object objRef =  naming.resolve(name);
 
             this.gate = GateHelper.narrow(objRef);		

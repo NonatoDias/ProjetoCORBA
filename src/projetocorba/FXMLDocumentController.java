@@ -27,6 +27,8 @@ import projetocorba.corba.Server;
  */
 public class FXMLDocumentController implements Initializable {
     
+    private Server server;
+    
     @FXML
     private Button button;
 
@@ -44,7 +46,7 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("click ok");
         Thread t = new Thread(() -> {
             System.out.println("SERVIDOR");
-            Server.run();
+            server.run();
         });
         t.setDaemon(true);
         t.start();
@@ -59,7 +61,7 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        server = new Server();
         
         btnWatchman.setOnAction((e)->{
             openWindow("FXMLWatchman.fxml");

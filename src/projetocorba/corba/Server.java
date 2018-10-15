@@ -17,41 +17,73 @@ package projetocorba.corba;
 
 import org.omg.CosNaming.*; 
 import org.omg.CORBA.*;
+import org.omg.CosNaming.NamingContextPackage.CannotProceed;
+import org.omg.CosNaming.NamingContextPackage.InvalidName;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.omg.PortableServer.*;
+import org.omg.PortableServer.POAPackage.ServantNotActive;
+import org.omg.PortableServer.POAPackage.WrongPolicy;
+import projetocorba.util.LogUtil;
 
 public class Server{
+    private POA rootPOA;
+    private NamingContext naming;
+    private ORB orb;
+    
+    private void init() throws org.omg.CORBA.ORBPackage.InvalidName {
+        String args [] = new String[1];
+        args[0] = "-ORBInitialHost Host";
+        this.orb = ORB.init(args,null); 	
+        org.omg.CORBA.Object objPoa = orb.resolve_initial_references("RootPOA");
 
-    public static void run(){
+        this.rootPOA = POAHelper.narrow(objPoa);		
+        org.omg.CORBA.Object obj = orb.resolve_initial_references("NameService");
+
+        this.naming = NamingContextHelper.narrow(obj);
+    }
+
+    
+    private void bindRef(Servant p_servant, String _id, String _kind) 
+        throws ServantNotActive, 
+        NotFound, 
+        WrongPolicy, 
+        CannotProceed, 
+        InvalidName
+    {
+        org.omg.CORBA.Object objRef = this.rootPOA.servant_to_reference(p_servant);
+
+        //Nomes
+        NameComponent[] name = {new NameComponent(_id, _kind)};
+        naming.rebind(name,objRef);
+    }
+
+    public void run(){
         try{
-            String args [] = new String[1];
-            args[0] = "-ORBInitialHost Host";
-            ORB orb = ORB.init(args,null); 	
-            org.omg.CORBA.Object objPoa = orb.resolve_initial_references("RootPOA");
-
-            POA rootPOA = POAHelper.narrow(objPoa);		
-            org.omg.CORBA.Object obj = orb.resolve_initial_references("NameService");
-
-            NamingContext naming = NamingContextHelper.narrow(obj);
+           this.init();
+           
+           WatchmanImpl watchman = new WatchmanImpl();
+           GateImpl gate = new GateImpl();
+           
+           gate.getOnCountChange(()->{
+               watchman.updateCount(gate.getCount());
+           });
+   
+            bindRef(watchman, "Watchman","implementacao");
+            bindRef(gate, "Gate","implementacao");
             
-            
-            //implementações
-            GateImpl gate = new GateImpl();
-            org.omg.CORBA.Object objRef = rootPOA.servant_to_reference(gate);
-
-            //Nomes
-            NameComponent[] name = {new NameComponent("Gate","Exemplo")};
-            naming.rebind(name,objRef);
-
             rootPOA.the_POAManager().activate();
-
-
-            System.out.println("Servidor Pronto ...");
-            orb.run();
+            
+            log("Servidor Pronto ...");
+            this.orb.run();
 
         }catch (Exception ex){
             System.out.println("Erro");
             ex.printStackTrace();
         }
+    }
+    
+    private void log(String msg){
+        LogUtil.log("SERVER", msg);
     }
 }
 

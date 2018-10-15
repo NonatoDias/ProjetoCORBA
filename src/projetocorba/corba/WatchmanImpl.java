@@ -15,6 +15,10 @@ import projetocorba.util.LogUtil;
 public class WatchmanImpl extends WatchmanPOA{
     String turn;
 
+    public WatchmanImpl() {
+        this.turn = "NIGHT";
+    }
+
     @Override
     public void setTurn(String turn) {
         this.turn = turn;
@@ -22,7 +26,7 @@ public class WatchmanImpl extends WatchmanPOA{
 
     @Override
     public void updateCount(int count) {
-        LogUtil.log("count", "" + count);
+        LogUtil.log("WatchmanImpl", "count " + count);
     }
     
 }
