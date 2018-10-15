@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -23,8 +24,12 @@ import projetocorba.corba.ClientMuseum;
  */
 public class FXMLMuseumController implements Initializable {
 
-    //private ClientMuseum clientMuseum;
+    private ClientMuseum clientMuseum;
+    
     int count_ = 0;
+    
+    @FXML
+    private Group grpSprite;
     
     @FXML
     private ImageView imgSprite;
@@ -43,7 +48,7 @@ public class FXMLMuseumController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setDayPeriod(0);
+        setDayPeriod(1);
         
         btnPlus.setOnAction((event) -> {
             moveSpriteUP();
@@ -89,58 +94,30 @@ public class FXMLMuseumController implements Initializable {
         }
     }
     
-    public void moveSpriteUP(){
-        disableBtns();
-        count_ = 0;
-        int [] order = {1, 3, 1, 2};
-        int step = -19;
-        imgSprite.setImage(new Image("img/up-"+order[count_]+".png"));
-        
-        TranslateTransition translateTransition = new TranslateTransition();  
-        translateTransition.setDuration(Duration.millis(400)); 
-        translateTransition.setNode(imgSprite);
-        
-        translateTransition.setByY(step);
-        translateTransition.setAutoReverse(false); 
-        translateTransition.setOnFinished((e)->{
-            count_ +=1;
-            if(count_ < 4){
-                imgSprite.setImage(new Image("img/up-"+order[count_]+".png"));
-                translateTransition.setByY(step);
-                translateTransition.play();
-            }else{
-                imgSprite.setImage(null);
-                translateTransition.stop();
-                enableBtns();
-            }
-        });
-        translateTransition.play();
-    }
-    
-    public void moveSpriteDOWN(){ 
+    public void moveSpriteDOWN(){
         disableBtns();
         count_ = 0;
         int [] order = {1, 3, 1, 2};
         int step = 19;
-        imgSprite.setLayoutY(227);
+        grpSprite.setLayoutY(227);
         imgSprite.setImage(new Image("img/down-"+order[count_]+".png"));
-        
         
         TranslateTransition translateTransition = new TranslateTransition();  
         translateTransition.setDuration(Duration.millis(400)); 
-        translateTransition.setNode(imgSprite);
+        translateTransition.setNode(grpSprite);
         
+        translateTransition.setFromY(0);
         translateTransition.setByY(step);
         translateTransition.setAutoReverse(false); 
         translateTransition.setOnFinished((e)->{
             count_ +=1;
             if(count_ < 4){
                 imgSprite.setImage(new Image("img/down-"+order[count_]+".png"));
+                translateTransition.setFromY(count_* step);
                 translateTransition.setByY(step);
                 translateTransition.play();
             }else{
                 imgSprite.setImage(null);
-                imgSprite.setLayoutY(300);
                 translateTransition.stop();
                 enableBtns();
             }
@@ -148,4 +125,34 @@ public class FXMLMuseumController implements Initializable {
         translateTransition.play();
     }
     
+    public void moveSpriteUP(){ 
+        disableBtns();
+        count_ = 0;
+        int [] order = {1, 3, 1, 2};
+        int step = -19;
+        grpSprite.setLayoutY(300);
+        imgSprite.setImage(new Image("img/up-"+order[count_]+".png"));
+        
+        TranslateTransition translateTransition = new TranslateTransition();  
+        translateTransition.setDuration(Duration.millis(400)); 
+        translateTransition.setNode(grpSprite);
+        
+        translateTransition.setFromY(0);
+        translateTransition.setByY(step);
+        translateTransition.setAutoReverse(false); 
+        translateTransition.setOnFinished((e)->{
+            count_ +=1;
+            if(count_ < 4){
+                imgSprite.setImage(new Image("img/up-"+order[count_]+".png"));
+                translateTransition.setFromY(count_* step);
+                translateTransition.setByY(step);
+                translateTransition.play();
+            }else{
+                imgSprite.setImage(null);
+                translateTransition.stop();
+                enableBtns();
+            }
+        });
+        translateTransition.play();
+    }
 }
