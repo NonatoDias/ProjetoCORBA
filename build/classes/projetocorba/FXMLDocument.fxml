@@ -1,13 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetocorba.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="166.0" prefWidth="194.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetocorba.FXMLDocumentController">
     <children>
-        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <Button fx:id="btnStart" layoutX="125.0" layoutY="141.0" text="INICIAR" />
-      <Label layoutX="32.0" layoutY="44.0" text="DIGITE no CMD&gt;  tnamserv" />
+      <Pane prefHeight="291.0" prefWidth="392.0" style="-fx-background-color: WHITESMOKE;">
+         <children>
+            <JFXButton fx:id="btnCMD" buttonType="RAISED" layoutX="249.0" layoutY="95.0" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: #ffffff;" text="Abrir cmd" />
+            <JFXButton fx:id="btnStart" buttonType="RAISED" layoutX="249.0" layoutY="158.0" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: #ffffff;" text="Iniciar" />
+            <Label layoutX="35.0" layoutY="95.0" text="1) Digitar no cmd">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="78.0" layoutY="125.0" text="&gt; tnameserv">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="37.0" layoutY="158.0" text="2) Clique em iniciar">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Pane layoutX="10.0" layoutY="6.0" prefHeight="59.0" prefWidth="382.0" style="-fx-background-color: #008e76;">
+               <children>
+                  <Label alignment="CENTER" layoutX="47.0" layoutY="15.0" prefHeight="30.0" prefWidth="321.0" text="PASSOS PARA EXECULTAR" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>

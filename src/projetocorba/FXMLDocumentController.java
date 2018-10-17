@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,15 +31,35 @@ public class FXMLDocumentController implements Initializable {
     private Label label;
     
     @FXML
-    private Button btnStart;
+    private JFXButton btnCMD;
+
+    @FXML
+    private JFXButton btnStart;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        btnCMD.setOnAction((e)->{
+            /*openWindow("FXMLMuseum.fxml");
+            openWindow("FXMLWatch.fxml");
+            openWindow("FXMLAlert.fxml");*/
+            String command = "cmd.exe /c START";
+
+            try {
+                Process child = Runtime.getRuntime().exec(command);
+                System.out.println("CMD");
+        
+            } catch (IOException ex) {
+                
+                System.out.println("ERROR: tnameserv já iniciado");
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
         btnStart.setOnAction((e)->{
             openWindow("FXMLMuseum.fxml");
-            openWindow("FXMLWatchman.fxml");
+            openWindow("FXMLWatch.fxml");
             openWindow("FXMLAlert.fxml");
         });
     }    

@@ -36,6 +36,10 @@ public class GateREMOTE extends GatePOA{
 
     @Override
     public int decreaseVisitor() {
+        if(this.count == 0){
+            return this.count;
+        }
+        
         this.count--;
         if(callback != null){
             callback.run();

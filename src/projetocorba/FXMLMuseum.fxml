@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="483.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetocorba.FXMLMuseumController">
+<AnchorPane id="AnchorPane" prefHeight="483.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetocorba.FXMLMuseumController">
    <children>
-      <Pane layoutX="9.0" layoutY="9.0" prefHeight="464.0" prefWidth="647.0" style="-fx-background-color: #e2e4e2;">
+      <Pane layoutX="9.0" layoutY="9.0" prefHeight="464.0" prefWidth="640.0" style="-fx-background-color: #e2e4e2;">
          <children>
-            <ImageView fx:id="imgMuseum" fitHeight="434.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgMuseum" fitHeight="401.0" fitWidth="680.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/museum-0.png" />
                </image></ImageView>
@@ -42,6 +42,15 @@
                   <ImageView fx:id="imgSprite" fitHeight="91.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Group>
+         </children>
+      </Pane>
+      <Pane layoutX="9.0" layoutY="4.0" prefHeight="59.0" prefWidth="640.0" style="-fx-background-color: #008e76;">
+         <children>
+            <Label alignment="CENTER" layoutX="146.0" layoutY="15.0" prefHeight="30.0" prefWidth="321.0" text="MUSEU" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="21.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

@@ -25,7 +25,7 @@ import projetocorba.corba.WatchControl;
  *
  * @author Nonato Dias
  */
-public class FXMLWatchmanController implements Initializable {
+public class FXMLWatchController implements Initializable {
 
     private WatchControl watchControl;
     

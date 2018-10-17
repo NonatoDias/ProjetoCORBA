@@ -27,7 +27,7 @@ import projetocorba.util.LogUtil;
 public class FXMLMuseumController implements Initializable {
     private MuseumControl museumControl;
     
-    int count_ = 0;
+    int index_ = 0;
     
     @FXML
     private Group grpSprite;
@@ -119,10 +119,10 @@ public class FXMLMuseumController implements Initializable {
         }
         
         disableBtns();
-        count_ = 0;
+        index_ = 0;
         int [] order = {1, 3, 1, 2};
         grpSprite.setLayoutY(y0);
-        imgSprite.setImage(new Image("img/"+prefix+"-"+order[count_]+".png"));
+        imgSprite.setImage(new Image("img/"+prefix+"-"+order[index_]+".png"));
         
         TranslateTransition translateTransition = new TranslateTransition();  
         translateTransition.setDuration(Duration.millis(400)); 
@@ -132,10 +132,10 @@ public class FXMLMuseumController implements Initializable {
         translateTransition.setByY(step);
         translateTransition.setAutoReverse(false); 
         translateTransition.setOnFinished((e)->{
-            count_ +=1;
-            if(count_ < 4){
-                imgSprite.setImage(new Image("img/"+prefix+"-"+order[count_]+".png"));
-                translateTransition.setFromY(count_* step);
+            index_ +=1;
+            if(index_ < 4){
+                imgSprite.setImage(new Image("img/"+prefix+"-"+order[index_]+".png"));
+                translateTransition.setFromY(index_* step);
                 translateTransition.setByY(step);
                 translateTransition.play();
             }else{

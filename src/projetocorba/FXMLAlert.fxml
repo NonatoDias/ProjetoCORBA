@@ -5,17 +5,26 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="244.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetocorba.FXMLAlertController">
+<AnchorPane id="AnchorPane" prefHeight="290.0" prefWidth="386.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetocorba.FXMLAlertController">
    <children>
-      <Pane prefHeight="244.0" prefWidth="404.0">
+      <Pane prefHeight="290.0" prefWidth="390.0">
          <children>
-            <Label layoutX="166.0" layoutY="29.0" text="ALERTAS" />
-            <ImageView fx:id="imgBell" fitHeight="157.0" fitWidth="188.0" layoutX="111.0" layoutY="61.0" opacity="0.12" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgBell" fitHeight="157.0" fitWidth="188.0" layoutX="111.0" layoutY="100.0" opacity="0.12" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/bell.png" />
                </image>
             </ImageView>
+            <Pane layoutX="5.0" layoutY="7.0" prefHeight="59.0" prefWidth="382.0" style="-fx-background-color: #008e76;">
+               <children>
+                  <Label alignment="CENTER" layoutX="24.0" layoutY="15.0" prefHeight="30.0" prefWidth="321.0" text="ALERTAS" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>
