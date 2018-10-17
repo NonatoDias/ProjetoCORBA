@@ -36,9 +36,9 @@ public class MuseumControl extends Server{
     }
     
     @Override
-    public void run() {
+    public void run(String [] args) {
         try {
-            super.init();
+            super.init(args);
             super.bindRef(gateREMOTE, "GateREMOTE","implementacao");
             super.bindRef(watchmanLOCAL, "WatchmanLOCAL","implementacao");
             super.activate();
@@ -47,6 +47,10 @@ public class MuseumControl extends Server{
             ready.run();
             gateREMOTE.getOnCountChange(()->{
                 try {
+                    watchman = WatchmanHelper.narrow(
+                        CorbaUtil.getObjRef("WatchmanREMOTE","implementacao")
+                    );
+                    
                     gate = GateHelper.narrow(
                         CorbaUtil.getObjRef("GateLOCAL","implementacao")
                     );
@@ -54,10 +58,6 @@ public class MuseumControl extends Server{
                     gate.updateCount(count);
                     bell = BellHelper.narrow(
                         CorbaUtil.getObjRef("BellLOCAL","implementacao")
-                    );
-                    
-                    watchman = WatchmanHelper.narrow(
-                        CorbaUtil.getObjRef("WatchmanREMOTE","implementacao")
                     );
                     
                     if(watchman.getTurn().equals("DAY") || count < 1){
@@ -90,6 +90,30 @@ public class MuseumControl extends Server{
     
     public int increaseVisitor () {
         return gateREMOTE.addVisitor();
+    }
+    
+    public Boolean canIncrease(){
+        try {
+            watchman = WatchmanHelper.narrow(
+                CorbaUtil.getObjRef("WatchmanREMOTE","implementacao")
+            );
+            if(watchman.getTurn().equals("DAY")){
+                return true;
+            }
+            return false;
+            
+        } catch (Exception ex) {
+            System.out.println("Erro");
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean canDecrease() {
+        if(gateREMOTE.getCount() > 0){
+            return true;
+        }
+        return false;
     }
     
     public int decreaseVisitor () {

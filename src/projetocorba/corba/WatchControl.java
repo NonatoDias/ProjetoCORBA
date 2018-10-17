@@ -35,9 +35,9 @@ public class WatchControl extends Server{
     }
     
     @Override
-    public void run() {
+    public void run(String [] args) {
         try {
-            super.init();
+            super.init(args);
             super.bindRef(watchmanREMOTE, "WatchmanREMOTE","implementacao");
             super.bindRef(gateLOCAL, "GateLOCAL","implementacao");
             super.activate();

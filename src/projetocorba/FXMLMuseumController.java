@@ -64,17 +64,21 @@ public class FXMLMuseumController implements Initializable {
     }    
     
     public void increaseVisitor(){
-        moveSprite("UP", ()->{
-            int c = museumControl.increaseVisitor();
-            updateCountVisitorInTheView(c);
-        });
+        if(museumControl.canIncrease()){
+            moveSprite("UP", ()->{
+                int c = museumControl.increaseVisitor();
+                updateCountVisitorInTheView(c);
+            });
+        }
     }
     
     public void decreaseVisitor(){
-        moveSprite("DOWN", ()->{
-            int c = museumControl.decreaseVisitor();
-            updateCountVisitorInTheView(c);
-        });
+        if(museumControl.canDecrease()){
+            moveSprite("DOWN", ()->{
+                int c = museumControl.decreaseVisitor();
+                updateCountVisitorInTheView(c);
+            });
+        }
     }
     
     public void disableBtns(){
@@ -163,7 +167,7 @@ public class FXMLMuseumController implements Initializable {
                 updateCountVisitorInTheView(c);
             });
             
-            museumControl.run();
+            museumControl.run(null);
         });
         t.setDaemon(true);
         t.start();

@@ -35,6 +35,15 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private JFXButton btnStart;
+
+    @FXML
+    private JFXButton btnStartAlert;
+
+    @FXML
+    private JFXButton btnStartWatch;
+
+    @FXML
+    private JFXButton btnStartMuseum;
     
     
     @Override
@@ -57,10 +66,16 @@ public class FXMLDocumentController implements Initializable {
             }
         });
         
-        btnStart.setOnAction((e)->{
-            openWindow("FXMLMuseum.fxml");
+        btnStartWatch.setOnAction((e)->{
             openWindow("FXMLWatch.fxml");
+        });
+        
+        btnStartAlert.setOnAction((e)->{
             openWindow("FXMLAlert.fxml");
+        });
+        
+        btnStartMuseum.setOnAction((e)->{
+            openWindow("FXMLMuseum.fxml");
         });
     }    
     

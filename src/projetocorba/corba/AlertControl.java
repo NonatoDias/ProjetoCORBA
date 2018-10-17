@@ -24,9 +24,9 @@ public class AlertControl extends Server{
     }
     
     @Override
-    public void run() {
+    public void run(String [] args) {
         try {
-            super.init();
+            super.init(args);
             super.bindRef(bellLOCAL, "BellLOCAL","implementacao");
             super.activate();
             log("Servidor alertas pronto");

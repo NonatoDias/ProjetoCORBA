@@ -11,7 +11,6 @@
       <Pane prefHeight="291.0" prefWidth="392.0" style="-fx-background-color: WHITESMOKE;">
          <children>
             <JFXButton fx:id="btnCMD" buttonType="RAISED" layoutX="249.0" layoutY="95.0" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: #ffffff;" text="Abrir cmd" />
-            <JFXButton fx:id="btnStart" buttonType="RAISED" layoutX="249.0" layoutY="158.0" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: #ffffff;" text="Iniciar" />
             <Label layoutX="35.0" layoutY="95.0" text="1) Digitar no cmd">
                <font>
                   <Font size="20.0" />
@@ -22,7 +21,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="37.0" layoutY="158.0" text="2) Clique em iniciar">
+            <Label layoutX="37.0" layoutY="158.0" prefHeight="30.0" prefWidth="189.0" text="2) Abrir as interfaces">
                <font>
                   <Font size="20.0" />
                </font>
@@ -36,6 +35,9 @@
                   </Label>
                </children>
             </Pane>
+            <JFXButton fx:id="btnStartAlert" buttonType="RAISED" layoutX="22.0" layoutY="234.0" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: #ffffff;" text="SINO" />
+            <JFXButton fx:id="btnStartWatch" buttonType="RAISED" layoutX="149.0" layoutY="234.0" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: #ffffff;" text="GUARDA" />
+            <JFXButton fx:id="btnStartMuseum" buttonType="RAISED" layoutX="272.0" layoutY="234.0" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: #ffffff;" text="MUSEU" />
          </children>
       </Pane>
     </children>

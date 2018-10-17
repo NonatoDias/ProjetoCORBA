@@ -23,7 +23,7 @@ public class BellLOCAL extends BellPOA{
     public void ring(){
         imgBell.setOpacity(1.0);
         if(ft == null){
-            ft = new FadeTransition(Duration.millis(650), imgBell);
+            ft = new FadeTransition(Duration.millis(600), imgBell);
             ft.setFromValue(1.0);
             ft.setToValue(0.1);
             ft.setCycleCount(Timeline.INDEFINITE);
@@ -34,7 +34,7 @@ public class BellLOCAL extends BellPOA{
     
     @Override
     public void stop() {
-        imgBell.setOpacity(0.10);
+        imgBell.setOpacity(0.05);
         
         if(ft != null){
             ft.setAutoReverse(false);

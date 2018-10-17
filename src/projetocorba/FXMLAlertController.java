@@ -45,7 +45,7 @@ public class FXMLAlertController implements Initializable {
             alertControl.getOnReady(()->{
                 //initClient();
             });
-            alertControl.run();
+            alertControl.run(null);
         });
         t.setDaemon(true);
         t.start();

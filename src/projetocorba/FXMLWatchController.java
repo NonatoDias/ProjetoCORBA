@@ -71,7 +71,7 @@ public class FXMLWatchController implements Initializable {
             watchControl.getOnReady(()->{
                 //initClient();
             });
-            watchControl.run();
+            watchControl.run(null);
         });
         t.setDaemon(true);
         t.start();

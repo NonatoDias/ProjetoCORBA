@@ -31,9 +31,11 @@ public abstract class Server{
     private NamingContext naming;
     private ORB orb;
     
-    public void init() throws org.omg.CORBA.ORBPackage.InvalidName {
-        String args [] = new String[1];
-        args[0] = "-ORBInitialHost Host";
+    public void init(String [] args) throws org.omg.CORBA.ORBPackage.InvalidName {
+        if(args == null){
+            args = new String[1];
+            args[0] = "-ORBInitialHost Host";
+        }
         this.orb = ORB.init(args,null); 	
         org.omg.CORBA.Object objPoa = orb.resolve_initial_references("RootPOA");
 
@@ -61,7 +63,7 @@ public abstract class Server{
     /**
      * Método de execução definido 
      */
-    public abstract void run();
+    public abstract void run(String [] args);
     
     public void activate() throws AdapterInactive{
         rootPOA.the_POAManager().activate();
