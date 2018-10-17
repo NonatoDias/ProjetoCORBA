@@ -30,9 +30,6 @@ public class FXMLWatchmanController implements Initializable {
     private WatchControl watchControl;
     
     @FXML
-    private ImageView imgBell;
-    
-    @FXML
     private Label displayCount;
     
     @FXML
@@ -63,7 +60,6 @@ public class FXMLWatchmanController implements Initializable {
         });
         
         initServer();
-        ring(false);
     }    
     
     private void initServer() {
@@ -79,20 +75,5 @@ public class FXMLWatchmanController implements Initializable {
         });
         t.setDaemon(true);
         t.start();
-    }
-    
-    public void ring(Boolean show){
-        if(!show){
-            imgBell.setVisible(false);
-            return;
-        }else{
-            imgBell.setVisible(true);
-        }
-        FadeTransition ft = new FadeTransition(Duration.millis(800), imgBell);
-        ft.setFromValue(1.0);
-        ft.setToValue(0.1);
-        ft.setCycleCount(Timeline.INDEFINITE);
-        ft.setAutoReverse(true);
-        ft.play();
     }
 }

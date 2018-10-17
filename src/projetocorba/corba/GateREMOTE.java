@@ -51,7 +51,10 @@ public class GateREMOTE extends GatePOA{
 
     @Override
     public void updateCount(int count) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.count = count;
+        if(callback != null){
+            callback.run();
+        }
     }
     
 }

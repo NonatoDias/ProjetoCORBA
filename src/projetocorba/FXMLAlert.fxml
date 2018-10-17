@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="244.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetocorba.FXMLAlertController">
+   <children>
+      <Pane prefHeight="244.0" prefWidth="404.0">
+         <children>
+            <Label layoutX="166.0" layoutY="29.0" text="ALERTAS" />
+            <ImageView fx:id="imgBell" fitHeight="157.0" fitWidth="188.0" layoutX="111.0" layoutY="61.0" opacity="0.12" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/bell.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

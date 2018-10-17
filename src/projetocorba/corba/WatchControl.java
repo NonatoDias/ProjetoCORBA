@@ -7,6 +7,7 @@ package projetocorba.corba;
 
 import GateModule.*;
 import WatchmanModule.*;
+import BellModule.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
@@ -23,6 +24,8 @@ import projetocorba.util.LogUtil;
 public class WatchControl extends Server{
     private Runnable ready;
     private Watchman watchman;
+    private Bell bell;
+    private Gate gate;
     private WatchmanREMOTE watchmanREMOTE;
     private GateLOCAL gateLOCAL;
 
@@ -45,7 +48,23 @@ public class WatchControl extends Server{
                     watchman = WatchmanHelper.narrow(
                         CorbaUtil.getObjRef("WatchmanLOCAL","implementacao")
                     );
-                    watchman.setTurn(watchmanREMOTE.getTurn());
+                    String turn = watchmanREMOTE.getTurn();
+                    watchman.setTurn(turn);
+                    
+                    bell = BellHelper.narrow(
+                        CorbaUtil.getObjRef("BellLOCAL","implementacao")
+                    );
+                    
+                    gate = GateHelper.narrow(
+                        CorbaUtil.getObjRef("GateREMOTE","implementacao")
+                    );
+                    
+                    int count = gate.getCount();
+                    if(turn.equals("DAY")){
+                        bell.stop();
+                    }else if(count > 0){
+                        bell.ring();
+                    }
                     
                 } catch (Exception ex) {
                     System.out.println("Erro");

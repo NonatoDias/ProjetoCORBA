@@ -17,7 +17,6 @@ import projetocorba.util.LogUtil;
 public class GateLOCAL extends GatePOA{
 
     private int count;
-    private Runnable callback = null;
     Label displayCount;
     
 
@@ -25,25 +24,15 @@ public class GateLOCAL extends GatePOA{
         this.count = 0;
     }
     
-    public void getOnCountChange(Runnable callback){
-        this.callback = callback;
-    }
-    
     @Override
     public int addVisitor() {
         this.count ++;
-        if(callback != null){
-            callback.run();
-        }
         return this.count;
     }
 
     @Override
     public int decreaseVisitor() {
         this.count--;
-        if(callback != null){
-            callback.run();
-        }
         return this.count;
     }
 
@@ -52,6 +41,7 @@ public class GateLOCAL extends GatePOA{
         return this.count;
     }
     
+    @Override
     public void updateCount(int count) {
         LogUtil.log("WatchmanImpl", " count " + count);
         Platform.runLater(()->{

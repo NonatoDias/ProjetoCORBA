@@ -38,6 +38,7 @@ public class FXMLDocumentController implements Initializable {
         btnStart.setOnAction((e)->{
             openWindow("FXMLMuseum.fxml");
             openWindow("FXMLWatchman.fxml");
+            openWindow("FXMLAlert.fxml");
         });
     }    
     

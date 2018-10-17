@@ -16,8 +16,7 @@ import projetocorba.util.LogUtil;
  */
 
 public class WatchmanREMOTE extends WatchmanPOA{
-    String turn;
-    Label displayCount;
+    String turn; //DAY, NIGHT
     private Runnable callback;
 
     public WatchmanREMOTE() {
