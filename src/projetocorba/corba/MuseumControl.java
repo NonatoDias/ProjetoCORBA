@@ -5,6 +5,8 @@
  */
 package projetocorba.corba;
 
+import BellModule.Bell;
+import BellModule.BellHelper;
 import GateModule.*;
 import WatchmanModule.*;
 import java.util.logging.Level;
@@ -23,6 +25,8 @@ import projetocorba.util.LogUtil;
 public class MuseumControl extends Server{
     private Runnable ready;
     private Gate gate;
+    private Watchman watchman;
+    private Bell bell;
     private GateREMOTE gateREMOTE;
     private WatchmanLOCAL watchmanLOCAL;
 
@@ -38,6 +42,7 @@ public class MuseumControl extends Server{
             super.bindRef(gateREMOTE, "GateREMOTE","implementacao");
             super.bindRef(watchmanLOCAL, "WatchmanLOCAL","implementacao");
             super.activate();
+            
             log("Servidor Museu pronto");
             ready.run();
             gateREMOTE.getOnCountChange(()->{
@@ -45,7 +50,22 @@ public class MuseumControl extends Server{
                     gate = GateHelper.narrow(
                         CorbaUtil.getObjRef("GateLOCAL","implementacao")
                     );
-                    gate.updateCount(gateREMOTE.getCount());
+                    int count = gateREMOTE.getCount();
+                    gate.updateCount(count);
+                    bell = BellHelper.narrow(
+                        CorbaUtil.getObjRef("BellLOCAL","implementacao")
+                    );
+                    
+                    watchman = WatchmanHelper.narrow(
+                        CorbaUtil.getObjRef("WatchmanREMOTE","implementacao")
+                    );
+                    
+                    if(watchman.getTurn().equals("DAY") || count < 1){
+                        bell.stop();
+                    }else {
+                        bell.ring();
+                    } 
+                    
                 } catch (Exception ex) {
                     System.out.println("Erro");
                     ex.printStackTrace();
